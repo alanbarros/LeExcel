@@ -2,17 +2,18 @@
 using SpreadSheetParser.Models;
 using SpreadSheetParser.Extensions;
 
-var sheet1 = new SheetFile<ContratoSheet>(new FileInfo("Book.xlsx"));
-var sheet2 = new SheetFile<CessionarioSheet>(new FileInfo("Book.xlsx"));
+var file = new FileInfo("Book.xlsx");
 
-List<ContratoSheet> contratos = sheet1.BuildSheet<ContratoSheet>();
-List<CessionarioSheet> cessionarios = sheet2.BuildSheet<CessionarioSheet>();
+List<ContractSheet> contracts = new SheetFile<ContractSheet>(file)
+    .Parse<ContractSheet>();
 
+List<AssigneeSheet> assignees = new SheetFile<AssigneeSheet>(file)
+    .Parse<AssigneeSheet>();
 
-contratos.Join(cessionarios,
-    c => c.CodigoCessionario,
-    c => c.CodigoCA, (c, c2) => new { c, c2 })
+contracts.Join(assignees,
+    c => c.AssigneeCode,
+    c => c.CACode, (c, c2) => new { c, c2 })
     .ToList()
     .ForEach(x =>
-        Console.WriteLine($"{x.c.NumeroContrato} - {x.c2.Nome}")
+        Console.WriteLine($"{x.c.ContractNumber} - {x.c2.Name}")
     );

@@ -4,20 +4,20 @@ using SpreadSheetParser.Models;
 namespace LeExcel
 {
     [DisplayName("Cessionarios")]
-    public class CessionarioSheet : SheetObject
+    public class AssigneeSheet : SheetObject
     {
         [DisplayName("Codigo CA")]
-        public String CodigoCA { get; set; }
+        public String CACode { get; set; }
 
         [DisplayName("Nome")]
-        public String Nome { get; set; }
+        public String Name { get; set; }
 
         [DisplayName("CNPJ")]
         public String CNPJ { get; set; }
 
-        public CessionarioSheet(SheetHeader header, SheetRow row) : base(header, row)
+        public AssigneeSheet(SheetHeader header, SheetRow row) : base(header, row)
         {
-            if (TryBuildObject<CessionarioSheet>(this) is false)
+            if (TryBuildObject<AssigneeSheet>(this) is false)
                 throw new ArgumentException("Could not create a sample object");
         }
 

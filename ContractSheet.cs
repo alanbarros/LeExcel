@@ -4,7 +4,7 @@ using SpreadSheetParser.Models;
 namespace LeExcel
 {
     [DisplayName("Contratos Cedidos")]
-    public class ContratoSheet : SheetObject
+    public class ContractSheet : SheetObject
     {
         [DisplayName("Operacao")]
         public Double Operacao { get; set; }
@@ -13,17 +13,17 @@ namespace LeExcel
         public String NumeroDocumento { get; set; }
 
         [DisplayName("Numero Contrato")]
-        public String NumeroContrato { get; set; }
+        public String ContractNumber { get; set; }
 
         [DisplayName("Codigo Cessionario")]
-        public String CodigoCessionario { get; set; }
+        public String AssigneeCode { get; set; }
 
         [DisplayName("Valor")]
         public Double Valor { get; set; }
 
-        public ContratoSheet(SheetHeader header, SheetRow row) : base(header, row)
+        public ContractSheet(SheetHeader header, SheetRow row) : base(header, row)
         {
-            if (TryBuildObject<ContratoSheet>(this) is false)
+            if (TryBuildObject<ContractSheet>(this) is false)
                 throw new ArgumentException("Could not create a sample object");
         }
 
