@@ -1,14 +1,10 @@
 ﻿using LeExcel;
 using SpreadSheetParser.Models;
-using SpreadSheetParser.Extensions;
 
 var file = new FileInfo("Book.xlsx");
 
-List<ContractSheet> contracts = new SheetFile<ContractSheet>(file)
-    .Parse<ContractSheet>();
-
-List<AssigneeSheet> assignees = new SheetFile<AssigneeSheet>(file)
-    .Parse<AssigneeSheet>();
+List<ContractSheet> contracts = SheetReader.ReadStream<ContractSheet>(file.OpenRead());
+List<AssigneeSheet> assignees = SheetReader.ReadStream<AssigneeSheet>(file.OpenRead());
 
 contracts.Join(assignees,
     c => c.AssigneeCode,
